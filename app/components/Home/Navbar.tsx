@@ -1,7 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-const Navbar = () => {
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/auth";
+import User from "@/app/Helper/User";
+const Navbar = async () => {
+  const session = await getServerSession(authOptions);
   return (
     <>
       <div className="h-[13vh] overflow-hidden shadow-md">
@@ -21,11 +25,19 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex items-center space-x-4">
-            <Link href="/signup">
-              <button className="px-4 py-1.5 text-[14px] sm:text-[16px] sm:px-6 sm:py-2 rounded-lg hover:bg-blue-600 text-white bg-blue-500 transition-all duration-300">
-                Sign Up
+            {!session && (
+              <Link href="/signup">
+                <button className="px-4 py-1.5 text-[14px] sm:text-[16px] sm:px-6 sm:py-2 rounded-lg hover:bg-blue-600 text-white bg-blue-500 transition-all duration-300">
+                  Sign Up
+                </button>
+              </Link>
+            )}
+            {session && <User session={session} />}
+            {session && (
+              <button className="px-4 py-1.5 text-[14px] sm:text-[16px] sm:px-6 sm:py-2 rounded-lg hover:bg-orange-600 text-white bg-orange-500 transition-all duration-300">
+                Post a Job
               </button>
-            </Link>
+            )}
           </div>
         </div>
       </div>
