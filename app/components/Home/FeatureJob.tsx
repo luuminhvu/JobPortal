@@ -14,13 +14,13 @@ const FeatureJob = () => {
         <div className="mt-12 w-[80%] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
           {JobData.map((job) => {
             return (
-              <Link href={`/jobs/jobdetails/${job.id}`} key={job.id}>
+              <Link href={`/job/jobdetails/${job.id}`} key={job.id}>
                 <JobCard job={job} />
               </Link>
             );
           })}
         </div>
-        <Link href="/job/alljob">
+        <Link href="/job/alljobs">
           <div className="text-center mt-[3rem]">
             <button className="py-2 px-8 bg-pink-500 text-white font-semibold rounded-lg">
               See All Jobs
